@@ -1,0 +1,24 @@
+{
+    "name": "mahaibo/ant",
+    "description": "php framework",
+    "type": "project",
+    "require": {
+        "php": ">=7.1.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "mahaibo",
+            "email": "mahaibo@hongbang.js.cn"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "": "library"
+        },
+        "files": [
+            "helper/QuickFun.php"
+        ]
+    }
+}
