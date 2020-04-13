@@ -4,7 +4,7 @@ class Output
 {
     public static function successOutput($array = array())
     {
-        $outputModule = Config::read('Framework.OutputModule');
+        $outputModule = Config::readEnv('OUTPUT_MODULE');
         self::initModule($outputModule);
         if (!is_callable($outputModule, 'successOutput') && $array != null) {
             self::defaultErrorOutput('EXECUTE_OUTPUT_FAIL', '执行输出模块[' . $outputModule . ']失败,模型中没有实现successOutput()');
@@ -14,7 +14,7 @@ class Output
 
     public static function errorOutput(string $errorCode, string $errorMsg, int $httpStatus = 400): void
     {
-        $outputModule = Config::read('Framework.OutputModule');
+        $outputModule = Config::readEnv('OUTPUT_MODULE');
         self::initModule($outputModule);
         if (!is_callable($outputModule, 'errorOutput')) {
             self::defaultErrorOutput('EXECUTE_OUTPUT_FAIL', '执行输出模块[' . $outputModule . ']失败,模型中没有实现errorOutput()');
@@ -32,7 +32,7 @@ class Output
     {
         $moduleFile = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'module' . DIRECTORY_SEPARATOR . $moduleName . '.PHP';
         if (!is_file($moduleFile)) {
-            $downloadUrl = 'compress.zlib://' . Config::read('Framework.ServiceUrl') . '/module/' . $moduleName . '.msphp';
+            $downloadUrl = 'compress.zlib://' . Config::readEnv('SERVICE_URL') . '/module/' . $moduleName . '.msphp';
             $result = file_get_contents($downloadUrl);
             if (!$result) {
                 Output::defaultErrorOutput('DOWNLOAD_MODULE_FAILE', '模块库中不存在此模块');

@@ -45,7 +45,7 @@ class Module
     {
         //载入数据库依赖信息
         $dbDepend = $moduleName::$dbDepend ?? array();
-        $dataBaseModule = Config::read('Framework.DataBaseModule');
+        $dataBaseModule = Config::readEnv('DATABASE_MODULE');
         $dataBaseModule !== $moduleName && $dbDepend != null
             and self::use($dataBaseModule)->syncDataBase($dbDepend) or Output::errorOutput('SYNC_DATABASE_FAIL', '同步数据库结构失败');
 
@@ -62,7 +62,7 @@ class Module
      */
     private static function download(string $moduleName, string $moduleFile): void
     {
-        $downloadUrl = 'compress.zlib://' . Config::read('Framework.ServiceUrl') . '/module/' . $moduleName . '.msphp';
+        $downloadUrl = 'compress.zlib://' . Config::readEnv('SERVICE_URL') . '/module/' . $moduleName . '.msphp';
         $result = file_get_contents($downloadUrl);
         if (!$result) {
             Output::errorOutput('DOWNLOAD_MODULE_FAIL', '官方模块库中不存在此模块');

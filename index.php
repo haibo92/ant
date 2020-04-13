@@ -2,7 +2,7 @@
 
 require_once('vendor/autoload.php');
 
-$module = str_replace('/' . readConfig('Framework.entryPassword') . '/', '', $_SERVER['PATH_INFO'], $result);
+$module = str_replace('/' . readEnv('ENTRY_PASSWORD') . '/', '', $_SERVER['PATH_INFO'], $result);
 
 if ($result) {
 

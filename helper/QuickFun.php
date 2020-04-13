@@ -48,3 +48,8 @@ function readConfig(string $configName)
 {
     return Config::read($configName);
 }
+
+function readEnv(string $configName)
+{
+    return Config::readEnv($configName);
+}
